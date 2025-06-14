@@ -80,7 +80,7 @@ function checkPasswordStrength(password) {
 
     return hasLength && hasUppercase && hasLowercase && hasNumber;
 }
-
+// error message and field validation
 function validateField(fieldName, value) {
     const rules = validation[fieldName];
     const errorElement = document.getElementById(`${fieldName === 'getUserRegister' ? 'username' : fieldName === 'getRegisterPassword' ? 'password' : fieldName === 'getRole' ? 'role' : fieldName === 'identificationCard' ? 'file' : fieldName}-error`);
@@ -117,7 +117,7 @@ function validateField(fieldName, value) {
     }
 
     return isValid;
-}
+}//handle ng file upload at validate ng type and size
 function handleFileUpload() {
     const uploadBtn = document.getElementById('upload-btn');
     const fileInput = document.getElementById('file-input');
@@ -214,7 +214,7 @@ function setupInputValidation() {
         });
     }
 }
-
+// checkkung valid yung mga fields
 async function handleFormSubmission(event) {
     event.preventDefault();
 
@@ -240,12 +240,29 @@ async function handleFormSubmission(event) {
     }
 
     try {
-        // ito  yung no file 
+// Pag upload ng file  
+        const fileData = new FormData();
+        fileData.append('file', identificationCard);
+
+        const uploadResponse = await fetch('http://localhost:3000/upload', {
+            method: 'POST',
+            body: fileData
+        });
+
+        if (!uploadResponse.ok) {
+            const error = await uploadResponse.json();
+            throw new Error(error.message || 'File upload failed');
+        }
+
+        const { url } = await uploadResponse.json();
+
+//Send user data sa /save-user
         const userData = {
             name: userName,
             username: getUserRegister,
             password: getRegisterPassword,
-            role: getRole
+            role: getRole,
+            identificationCardUrl: url 
         };
 
         const userResponse = await fetch('http://localhost:3000/save-user', {
@@ -258,21 +275,7 @@ async function handleFormSubmission(event) {
             const error = await userResponse.json();
             throw new Error(error.message || 'User registration failed');
         }
-
-        // 2. ito yung upload
-        const fileData = new FormData();
-        fileData.append('file', identificationCard);
-
-        const fileResponse = await fetch('http://localhost:3000/upload', {
-            method: 'POST',
-            body: fileData
-        });
-
-        if (!fileResponse.ok) {
-            const error = await fileResponse.json();
-            throw new Error(error.message || 'File upload failed');
-        }
-
+//success message
         const successMessage = document.getElementById('success-message');
         const registerForm = document.getElementById('registerForm');
         if (successMessage && registerForm) {
@@ -294,7 +297,7 @@ async function handleFormSubmission(event) {
         }
     }
 }
-
+// Balik sa previous page
 function goBack() {
     if (window.history.length > 1) {
         window.history.back();
@@ -302,7 +305,7 @@ function goBack() {
         window.location.href = '/';
     }
 }
-
+//initialize ng event listeners
 function initializeApp() {
     console.log('Initializing application...');
     
@@ -326,7 +329,7 @@ document.addEventListener('DOMContentLoaded', function() {
     console.log('DOM loaded, initializing app...');
     initializeApp();
 });
-
+//Kuha ng registration data
 function getRegistrationData() {
     return {
         name: userName,
