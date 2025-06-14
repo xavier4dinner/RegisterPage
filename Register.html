@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Your Account - Infinity</title>
+    <link rel="stylesheet" href="Register.css">
+</head>
+<body>
+    <header class="header">
+        <div class="header-container">
+            <div class="logo">
+                <img src="487769399_1353694459261124_3238034296731458121_n.jpg" alt="infinitysalon">
+            </div>
+        </div>
+    </header>
+
+    <main class="main">
+        <div class="form-container">
+            <h1 class="title">Create your account</h1>
+
+            <div id="success-message" class="success-message" style="display: none;">
+                Account created successfully! Please check your email for verification.
+            </div>
+
+            <form class="form" id="registerForm" novalidate>
+                <div class="form-group">
+                    <label for="name" class="label">Name</label>
+                    <input type="text" id="name" name="name" class="input" required>
+                    <div id="name-error" class="error-message"></div>
+                </div>
+
+                <div class="form-group">
+                    <label for="getUserRegister" class="label">Username</label>
+                    <input type="text" id="getUserRegister" name="getUserRegister" class="input" required>
+                    <div id="username-error" class="error-message"></div>
+                </div>
+
+                <div class="form-group">
+                    <label for="getRegisterPassword" class="label">Password</label>
+                    <input type="password" id="getRegisterPassword" name="getRegisterPassword" class="input" required>
+                    <div class="password-requirements">
+                        <div class="requirement invalid" id="length-req">
+                            <span>•</span> At least 8 characters
+                        </div>
+                        <div class="requirement invalid" id="uppercase-req">
+                            <span>•</span> One uppercase letter
+                        </div>
+                        <div class="requirement invalid" id="lowercase-req">
+                            <span>•</span> One lowercase letter
+                        </div>
+                        <div class="requirement invalid" id="number-req">
+                            <span>•</span> One number
+                        </div>
+                    </div>
+                    <div id="password-error" class="error-message"></div>
+                </div>
+
+                <div class="form-group">
+                    <label for="getRole" class="label">Position/Role</label>
+                    <select id="getRole" name="getRole" class="input" required>
+                        <option value="">Select your role</option>
+                        <option value="Marketing Lead">Marketing Lead</option>
+                        <option value="Content Creator">Content Creator</option>
+                        <option value="Graphic Designer">Graphic Designer</option>
+                    </select>
+                    <div id="role-error" class="error-message"></div>
+                </div>
+
+                <div class="form-group">
+                    <label for="id-card" class="label">Identification Card</label>
+                    <div class="upload-container">
+                        <button type="button" class="upload-button" id="upload-btn">
+                            <svg class="upload-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"></path>
+                            </svg>
+                            Upload Your File Here
+                        </button>
+                        <input type="file" id="file-input" name="identificationCard" class="hidden-file-input" accept=".pdf,.jpg,.jpeg,.png" required>
+                    </div>
+                    <div id="file-error" class="error-message"></div>
+                </div>
+
+                <button type="submit" class="signup-button" id="submit-btn">
+                    <span id="submit-text">Sign Up</span>
+                    <span id="submit-loading" class="loading" style="display: none;"></span>
+                </button>
+
+                <button type="button" class="back-button" onclick="goBack()">Back</button>
+            </form>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="nail">
+            <img src="Infinity-Nails-Salon-Ocoee-FL-34761-logo.png" alt="infinitysalon" id="nails">
+            </div>
+
+            <div class="footer-links">
+                <svg class="facebook-icon" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                </svg>
+                <a href="#" class="footer-link">Terms & Condition</a>
+                <a href="#" class="footer-link">Policy Privacy</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="Register.js"></script>
+</body>
+</html>
